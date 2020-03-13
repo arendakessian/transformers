@@ -546,8 +546,8 @@ class BOOLQProcessor(DataProcessor):
             if i == 0:
                 continue
             print(line)
-            line = json.loads(line)
             line = line[0]
+            line = json.loads(line)
             print(line)
             guid = "%s-%s" % (set_type, line[0])
             text_a = line[0]
