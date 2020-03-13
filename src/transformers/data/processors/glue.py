@@ -17,6 +17,7 @@
 
 import logging
 import os
+import json
 
 from ...file_utils import is_tf_available
 from .utils import DataProcessor, InputExample, InputFeatures
@@ -520,8 +521,8 @@ class BOOLQProcessor(DataProcessor):
         """See base class."""
         return InputExample(
             tensor_dict["idx"].numpy(),
-            tensor_dict["question"].numpy().decode("utf-8"),
-            tensor_dict["passage"].numpy().decode("utf-8"),
+            tensor_dict["sentence1"].numpy().decode("utf-8"),
+            tensor_dict["sentence2"].numpy().decode("utf-8"),
             str(tensor_dict["label"].numpy()),
         )
 
@@ -544,9 +545,11 @@ class BOOLQProcessor(DataProcessor):
         for (i, line) in enumerate(lines):
             if i == 0:
                 continue
+            print(line)
+            line = json.loads(json)    
             guid = "%s-%s" % (set_type, line[0])
-            text_a = line[1]
-            text_b = line[2]
+            text_a = line[0]
+            text_b = line[1]
             label = line[-1]
             examples.append(InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
         return examples
