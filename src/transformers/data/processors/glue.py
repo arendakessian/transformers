@@ -548,7 +548,7 @@ class BOOLQProcessor(DataProcessor):
             print(line)
             line = line[0]
             line = json.loads(line)
-            print(line)
+            print(line["passage"])
             guid = "%s-%s" % (set_type, line[0])
             text_a = line[0]
             text_b = line[1]
