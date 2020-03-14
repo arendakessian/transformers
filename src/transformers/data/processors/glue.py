@@ -545,14 +545,12 @@ class BOOLQProcessor(DataProcessor):
         for (i, line) in enumerate(lines):
             if i == 0:
                 continue
-            print(line)
             line = line[0]
             line = json.loads(line)
-            print(line["passage"])
-            guid = "%s-%s" % (set_type, line[0])
-            text_a = line[0]
-            text_b = line[1]
-            label = line[-1]
+            guid = "%s-%s" % (set_type, line["idx"])
+            text_a = line["question"]
+            text_b = line["passage"]
+            label = line["label"]
             examples.append(InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
         return examples
 
